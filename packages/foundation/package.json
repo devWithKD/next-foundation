@@ -1,0 +1,73 @@
+{
+  "name": "@kedar/foundation",
+  "version": "0.1.0",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "src",
+    "!src/**/*.test.ts"
+  ],
+  "exports": {
+    "./errors": "./src/errors/index.ts",
+    "./result": "./src/result/index.ts",
+    "./env": "./src/env/index.ts",
+    "./logger": "./src/logger/index.ts",
+    "./authz": "./src/authz/index.ts",
+    "./list": "./src/list/index.ts",
+    "./query": "./src/query/index.ts",
+    "./context": "./src/context/index.ts",
+    "./adapters": "./src/adapters/index.ts",
+    "./better-auth": "./src/better-auth/index.ts",
+    "./jobs": "./src/jobs/index.ts",
+    "./db": "./src/db/index.ts",
+    "./redis": "./src/redis/index.ts",
+    "./cache": "./src/cache/index.ts",
+    "./audit": "./src/audit/index.ts",
+    "./react": "./src/react/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "@tanstack/react-query": ">=5.100",
+    "@upstash/redis": ">=1.39",
+    "better-auth": ">=1.7",
+    "drizzle-orm": ">=1.0.0-rc.4",
+    "ioredis": ">=5",
+    "next": ">=16.3",
+    "react": ">=19.2",
+    "server-only": ">=0.0.1",
+    "zod": ">=4.1"
+  },
+  "peerDependenciesMeta": {
+    "@tanstack/react-query": {
+      "optional": true
+    },
+    "@upstash/redis": {
+      "optional": true
+    },
+    "better-auth": {
+      "optional": true
+    },
+    "ioredis": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@tanstack/react-query": "^5.104.0",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@upstash/redis": "^1.39.0",
+    "better-auth": "^1.7.5",
+    "drizzle-orm": "1.0.0-rc.4",
+    "ioredis": "^6.0.0",
+    "next": "16.3.6",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "server-only": "^0.0.1",
+    "typescript": "^5",
+    "vitest": "^5.0.3",
+    "zod": "^4.6.5"
+  }
+}
