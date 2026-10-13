@@ -3,7 +3,7 @@
 TanStack Query plumbing for the RSC-prefetch-then-client pattern.
 
 ```ts
-import { createQueryKeys, getQueryClient } from "@kedar/foundation/query";
+import { createQueryKeys, getQueryClient } from "@devwithkd/foundation/query";
 
 export const roleKeys = createQueryKeys("role");
 roleKeys.list(params);   // ["role", "list", params]

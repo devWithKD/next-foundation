@@ -4,7 +4,7 @@ Permission checks over a project's own permission strings. The package knows
 only `BaseActor`; how a session becomes an actor is the project's decision.
 
 ```ts
-import { createAuthz, type PermissionOf, type Statements } from "@kedar/foundation/authz";
+import { createAuthz, type PermissionOf, type Statements } from "@devwithkd/foundation/authz";
 
 export const statements = { sku: ["create", "list"], so: ["create", "approve"] } as const satisfies Statements;
 export type Permission = PermissionOf<typeof statements>; // "sku:create" | "sku:list" | …

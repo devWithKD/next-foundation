@@ -1,8 +1,35 @@
 {
-  "name": "@kedar/foundation",
+  "name": "@devwithkd/foundation",
   "version": "0.1.0",
+  "description": "Layered-architecture building blocks for Next.js apps: server action and route adapters, authz, list/query contracts, Drizzle repositories, audit, Redis and React helpers. Ships TypeScript source.",
+  "keywords": [
+    "nextjs",
+    "server-actions",
+    "drizzle",
+    "better-auth",
+    "tanstack-query",
+    "audit",
+    "architecture"
+  ],
+  "license": "MIT",
+  "author": "Kedar Joshi",
+  "homepage": "https://github.com/devWithKD/next-foundation#readme",
+  "bugs": {
+    "url": "https://github.com/devWithKD/next-foundation/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devWithKD/next-foundation.git",
+    "directory": "packages/foundation"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "sideEffects": false,
+  "engines": {
+    "node": ">=22.12"
+  },
   "files": [
     "src",
     "!src/**/*.test.ts",
@@ -30,7 +57,8 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "prepublishOnly": "pnpm typecheck && pnpm test"
   },
   "peerDependencies": {
     "@tanstack/react-query": ">=5.100",

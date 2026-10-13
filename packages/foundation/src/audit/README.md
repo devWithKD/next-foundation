@@ -4,7 +4,7 @@ Builds audit rows. It owns no table and no repository: each project defines
 its own, because the table references the project's user table.
 
 ```ts
-import { defineAuditActions, auditEntry } from "@kedar/foundation/audit";
+import { defineAuditActions, auditEntry } from "@devwithkd/foundation/audit";
 
 export const userAudit = defineAuditActions("user", { created: "medium", deleted: "critical" });
 
@@ -26,7 +26,7 @@ await auditRepository.record(
   describe something that rolled back. **Auth hooks and denials** have no
   transaction: write them with the base db inside `after()`.
 - No `org_id`. A project that needs a scope column adds its own.
-- `RequestContext` from `@kedar/foundation/context` satisfies `AuditContext`,
+- `RequestContext` from `@devwithkd/foundation/context` satisfies `AuditContext`,
   so IP, user agent and request id are filled for free.
 
 ## Canonical table (copy into the project's `audit.sql.ts`)

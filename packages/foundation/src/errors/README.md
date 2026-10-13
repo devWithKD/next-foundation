@@ -14,7 +14,7 @@ the adapters turn them into `{ ok: false, code, message }` (actions) or
 | `ValidationError(fieldErrors)` | `validation` | 422 |
 
 ```ts
-import { ConflictError, NotFoundError, isAppError } from "@kedar/foundation/errors";
+import { ConflictError, NotFoundError, isAppError } from "@devwithkd/foundation/errors";
 
 throw new NotFoundError("Role not found");
 throw new ConflictError("A role with this name exists", { field: "name" }); // 2nd arg: meta

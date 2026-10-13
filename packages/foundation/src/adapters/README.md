@@ -5,7 +5,7 @@ over the same services, so a project can serve a web UI and a mobile app from
 one set of commands.
 
 ```ts
-import { createAdapters } from "@kedar/foundation/adapters";
+import { createAdapters } from "@devwithkd/foundation/adapters";
 
 export const { createAction, createRoute, createPublicRoute, requirePage } = createAdapters({
   context: authContext,

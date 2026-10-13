@@ -1,7 +1,32 @@
 {
-  "name": "@kedar/eslint-plugin",
+  "name": "@devwithkd/eslint-plugin",
   "version": "0.1.0",
+  "description": "ESLint rules for the layered Next.js pattern: colocated server actions, wrapped action exports, module boundaries, import limits.",
+  "keywords": [
+    "eslint",
+    "eslint-plugin",
+    "nextjs",
+    "server-actions",
+    "architecture"
+  ],
+  "license": "MIT",
+  "author": "Kedar Joshi",
+  "homepage": "https://github.com/devWithKD/next-foundation#readme",
+  "bugs": {
+    "url": "https://github.com/devWithKD/next-foundation/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devWithKD/next-foundation.git",
+    "directory": "packages/eslint-plugin"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
@@ -10,7 +35,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json --noEmit false",
     "typecheck": "tsc --noEmit -p .",
-    "test": "vitest run"
+    "test": "vitest run",
+    "prepublishOnly": "pnpm build && pnpm typecheck && pnpm test"
   },
   "peerDependencies": {
     "eslint": ">=9",
@@ -23,5 +49,11 @@
     "typescript": "^5",
     "typescript-eslint": "^8.71.1",
     "vitest": "^5.0.3"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
   }
 }

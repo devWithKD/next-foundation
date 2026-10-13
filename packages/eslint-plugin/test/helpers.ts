@@ -11,7 +11,7 @@ RuleTester.itOnly = it.only;
 export const FIXTURES = "test/fixtures/src";
 
 export const settings = {
-  kedar: {
+  foundation: {
     srcDir: FIXTURES,
     appDir: `${FIXTURES}/app`,
     modulesDir: `${FIXTURES}/modules`,

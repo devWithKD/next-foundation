@@ -1,5 +1,5 @@
 import path from "node:path";
-import type { KedarSettings } from "./settings.js";
+import type { FoundationSettings } from "./settings.js";
 
 const EXT = /\.[cm]?[jt]sx?$/;
 const TEST_FILE = /\.(test|spec)\.[cm]?[jt]sx?$/;
@@ -12,7 +12,7 @@ export const isTestFile = (p: string) => TEST_FILE.test(p);
  * or null for packages and anything we can't place. Relative imports and the
  * configured aliases only: a package import never resolves into the project.
  */
-export function resolveImport(importerRel: string, source: string, settings: KedarSettings): string | null {
+export function resolveImport(importerRel: string, source: string, settings: FoundationSettings): string | null {
   if (source === "." || source === ".." || source.startsWith("./") || source.startsWith("../")) {
     return stripExt(path.posix.normalize(path.posix.join(path.posix.dirname(importerRel), source)));
   }

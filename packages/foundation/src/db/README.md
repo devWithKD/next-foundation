@@ -4,7 +4,7 @@ Data-access base for Drizzle (`PgAsyncDatabase`, no relations: queries use the
 query builder only).
 
 ```ts
-import { Repository, SoftDeletableRepository, inIds, buildOrderBy, paginate } from "@kedar/foundation/db";
+import { Repository, SoftDeletableRepository, inIds, buildOrderBy, paginate } from "@devwithkd/foundation/db";
 
 class RoleRepository extends SoftDeletableRepository<typeof role, "id"> {
   constructor(db: WriteExecutor) { super(role, db, ["id"]); }

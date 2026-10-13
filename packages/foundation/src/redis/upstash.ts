@@ -2,7 +2,7 @@ import "server-only";
 import { Redis } from "@upstash/redis";
 import type { RedisClient, RedisSetOptions } from "./client";
 
-// A separate subpath (`@kedar/foundation/redis/upstash`) so projects that
+// A separate subpath (`@devwithkd/foundation/redis/upstash`) so projects that
 // don't install @upstash/redis never type-check or bundle this file.
 
 // Derived from the SDK's own signature so it tracks SDK versions.

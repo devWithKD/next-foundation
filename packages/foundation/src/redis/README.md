@@ -5,9 +5,9 @@ sliding-window rate limiter and a token-checked lock. Drivers live on their own
 subpaths so a project type-checks and bundles only the one it installs.
 
 ```ts
-import { createIoRedisClient } from "@kedar/foundation/redis/ioredis";   // TCP
-import { createUpstashClient } from "@kedar/foundation/redis/upstash";   // HTTP
-import { createRedisRateLimiter, withRedisLock } from "@kedar/foundation/redis";
+import { createIoRedisClient } from "@devwithkd/foundation/redis/ioredis";   // TCP
+import { createUpstashClient } from "@devwithkd/foundation/redis/upstash";   // HTTP
+import { createRedisRateLimiter, withRedisLock } from "@devwithkd/foundation/redis";
 
 const redis = createIoRedisClient(serverEnv.REDIS_URL);
 export const rateLimiter = createRedisRateLimiter(redis, logger, { failOpen: true });

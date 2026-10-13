@@ -7,7 +7,7 @@ Helpers for projects that use better-auth. The package never imports your
 into `resource:action` grants from your own role definitions:
 
 ```ts
-import { permissionsFromRoles } from "@kedar/foundation/better-auth";
+import { permissionsFromRoles } from "@devwithkd/foundation/better-auth";
 
 const { permissions, unknownRoles } = permissionsFromRoles(session.user.role, roles);
 // "manager,sku:create"  →  every grant of the manager role, plus "sku:create"

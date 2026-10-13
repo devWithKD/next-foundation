@@ -1,21 +1,21 @@
-# @kedar/eslint-plugin
+# @devwithkd/eslint-plugin
 
 Lint rules that keep the layered pattern from eroding. Built JS (`dist/`), so
-build it before linting: `pnpm --filter @kedar/eslint-plugin build`.
+build it before linting: `pnpm --filter @devwithkd/eslint-plugin build`.
 
 ```js
 // eslint.config.mjs
 import { defineConfig } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
-import kedar from "@kedar/eslint-plugin";
+import foundation from "@devwithkd/eslint-plugin";
 
 export default defineConfig([
   ...nextVitals,
   ...nextTs,
-  ...kedar.configs.recommended, // or .standalone if nothing registers @typescript-eslint
+  ...foundation.configs.recommended, // or .standalone if nothing registers @typescript-eslint
   // Optional: only if your layout differs from the defaults below.
-  { settings: { kedar: { srcDir: "src", appDir: "src/app", modulesDir: "src/modules", serverDir: "src/server", alias: { "@/": "src/" } } } },
+  { settings: { foundation: { srcDir: "src", appDir: "src/app", modulesDir: "src/modules", serverDir: "src/server", alias: { "@/": "src/" } } } },
 ]);
 ```
 

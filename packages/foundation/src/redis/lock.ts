@@ -35,7 +35,7 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 /**
  * Runs `fn` while holding `lock:<key>`. Best-effort mutual exclusion for
  * work outside Postgres; inside a transaction prefer row or advisory locks
- * (`withAdvisoryLock` in `@kedar/foundation/db`).
+ * (`withAdvisoryLock` in `@devwithkd/foundation/db`).
  */
 export async function withRedisLock<T>(
   redis: RedisClient,

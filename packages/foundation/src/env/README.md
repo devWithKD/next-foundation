@@ -5,7 +5,7 @@ time, so a bad config crashes at boot instead of surfacing as a runtime 500.
 
 ```ts
 import { z } from "zod";
-import { parseEnv } from "@kedar/foundation/env";
+import { parseEnv } from "@devwithkd/foundation/env";
 
 export const serverEnv = parseEnv(
   z.object({

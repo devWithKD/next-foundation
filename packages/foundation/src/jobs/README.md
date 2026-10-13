@@ -4,7 +4,7 @@
 the transport can change.
 
 ```ts
-import { createAfterJobs, type JobPort } from "@kedar/foundation/jobs";
+import { createAfterJobs, type JobPort } from "@devwithkd/foundation/jobs";
 
 type Jobs = { "email.send": { to: string }; "report.build": { id: string } };
 

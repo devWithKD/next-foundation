@@ -30,15 +30,15 @@ describe("recommended preset", () => {
 
   it("wires the custom rules with the default layout", async () => {
     const messages = await lint("src/app/orders/_actions.ts", '"use server";\nexport async function create() {}\n');
-    expect(hits(messages, "@kedar/server-actions-only-wrapped")).toHaveLength(1);
+    expect(hits(messages, "@devwithkd/server-actions-only-wrapped")).toHaveLength(1);
 
     expect(await lint("src/app/orders/_actions.ts", '"use server";\nimport { createAction } from "@/server/adapters";\nexport const create = createAction({});\n')).toEqual([]);
 
     const legacy = await lint("src/modules/user/user.actions.ts", "export const x = 1;\n");
-    expect(hits(legacy, "@kedar/colocated-actions")).toHaveLength(1);
+    expect(hits(legacy, "@devwithkd/colocated-actions")).toHaveLength(1);
 
     const foreign = await lint("src/modules/user/user.service.ts", 'import { r } from "@/modules/role/role.repository";\nexport const x = r;\n');
-    expect(hits(foreign, "@kedar/module-boundaries")).toHaveLength(1);
+    expect(hits(foreign, "@devwithkd/module-boundaries")).toHaveLength(1);
   });
 
   it("`recommended` works next to a config that registers @typescript-eslint (eslint-config-next does)", async () => {

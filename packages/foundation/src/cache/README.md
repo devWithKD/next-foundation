@@ -4,7 +4,7 @@
 caching only after a measured slow query.
 
 ```ts
-import { NoopCache, RedisCache } from "@kedar/foundation/cache";
+import { NoopCache, RedisCache } from "@devwithkd/foundation/cache";
 
 export const cache = serverEnv.REDIS_URL ? new RedisCache(redis, logger) : new NoopCache();
 

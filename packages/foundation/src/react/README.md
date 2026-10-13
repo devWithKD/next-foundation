@@ -4,7 +4,7 @@ Client-side pieces. Every file is a client module except `api-error.ts`, which
 is isomorphic.
 
 ```ts
-import { ApiError, fetchApi, applyFieldErrors, useListState, useActionMutation } from "@kedar/foundation/react";
+import { ApiError, fetchApi, applyFieldErrors, useListState, useActionMutation } from "@devwithkd/foundation/react";
 ```
 
 **`fetchApi<T>(url, init?)`** calls a route built with `createRoute` and unwraps `{ data }`. Every failure is an `ApiError`: the server's `{ error }` keeps its code and field errors, a dropped connection is `ApiError(0, network)`, an unreadable body is `bad_response`. An `AbortError` (TanStack cancelling a stale query) passes through untouched. `204` returns `undefined`.

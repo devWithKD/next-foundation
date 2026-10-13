@@ -2,7 +2,7 @@ import "server-only";
 import { Redis } from "ioredis";
 import type { RedisClient, RedisSetOptions } from "./client";
 
-// A separate subpath (`@kedar/foundation/redis/ioredis`) so projects that
+// A separate subpath (`@devwithkd/foundation/redis/ioredis`) so projects that
 // don't install ioredis never type-check or bundle this file.
 
 function performSet(client: Redis, key: string, value: string, opts?: RedisSetOptions) {

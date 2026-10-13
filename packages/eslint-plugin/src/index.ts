@@ -5,7 +5,7 @@ import moduleBoundaries from "./rules/module-boundaries.js";
 import noForeignActions from "./rules/no-foreign-actions.js";
 import serverActionsOnlyWrapped from "./rules/server-actions-only-wrapped.js";
 
-export { DEFAULT_SETTINGS, type KedarSettings } from "./settings.js";
+export { DEFAULT_SETTINGS, type FoundationSettings } from "./settings.js";
 export { DEFAULT_ALLOW } from "./rules/module-boundaries.js";
 
 export const rules = {
@@ -15,7 +15,7 @@ export const rules = {
   "module-boundaries": moduleBoundaries,
 };
 
-const plugin: ESLint.Plugin = { meta: { name: "@kedar/eslint-plugin", version: "0.1.0" }, rules };
+const plugin: ESLint.Plugin = { meta: { name: "@devwithkd/eslint-plugin", version: "0.1.0" }, rules };
 
 // Flat config does NOT merge `no-restricted-imports` across blocks: for a given
 // file the LAST matching block's options replace the earlier ones. Keep the
@@ -36,13 +36,13 @@ const pattern = (group: string[], message: string) => ({ group, message, allowTy
  */
 export const recommended: Linter.Config[] = [
   {
-    name: "@kedar/rules",
-    plugins: { "@kedar": plugin },
+    name: "@devwithkd/rules",
+    plugins: { "@devwithkd": plugin },
     rules: {
-      "@kedar/colocated-actions": "error",
-      "@kedar/no-foreign-actions": "error",
-      "@kedar/server-actions-only-wrapped": "error",
-      "@kedar/module-boundaries": "error",
+      "@devwithkd/colocated-actions": "error",
+      "@devwithkd/no-foreign-actions": "error",
+      "@devwithkd/server-actions-only-wrapped": "error",
+      "@devwithkd/module-boundaries": "error",
       "@typescript-eslint/consistent-type-imports": "error",
     },
   },
@@ -79,7 +79,7 @@ export const recommended: Linter.Config[] = [
 
 /** `recommended` for projects that don't already register the `@typescript-eslint` plugin. */
 export const standalone: Linter.Config[] = [
-  { name: "@kedar/typescript-plugin", plugins: { "@typescript-eslint": tseslint.plugin as unknown as ESLint.Plugin } },
+  { name: "@devwithkd/typescript-plugin", plugins: { "@typescript-eslint": tseslint.plugin as unknown as ESLint.Plugin } },
   ...recommended,
 ];
 

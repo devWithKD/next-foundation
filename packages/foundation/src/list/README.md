@@ -5,7 +5,7 @@ and the client hook.
 
 ```ts
 import { z } from "zod";
-import { defineListQuery, listArray } from "@kedar/foundation/list";
+import { defineListQuery, listArray } from "@devwithkd/foundation/list";
 
 export const roleListQuery = defineListQuery({
   filters: { q: z.string().optional(), status: listArray(z.enum(["active", "archived"])) },

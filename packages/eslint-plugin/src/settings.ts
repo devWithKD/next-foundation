@@ -1,8 +1,8 @@
 import path from "node:path";
 import type { Rule } from "eslint";
 
-/** Shared project layout, read from `settings.kedar` in the flat config. */
-export type KedarSettings = {
+/** Shared project layout, read from `settings.foundation` in the flat config. */
+export type FoundationSettings = {
   srcDir: string;
   appDir: string;
   modulesDir: string;
@@ -11,7 +11,7 @@ export type KedarSettings = {
   alias: Record<string, string>;
 };
 
-export const DEFAULT_SETTINGS: KedarSettings = {
+export const DEFAULT_SETTINGS: FoundationSettings = {
   srcDir: "src",
   appDir: "src/app",
   modulesDir: "src/modules",
@@ -26,8 +26,8 @@ export function cleanDir(dir: string): string {
   return path.posix.normalize(toPosix(dir)).replace(/^\.\//, "").replace(/\/+$/, "");
 }
 
-export function getSettings(context: Rule.RuleContext): KedarSettings {
-  const user = ((context.settings as Record<string, unknown> | undefined)?.kedar ?? {}) as Partial<KedarSettings>;
+export function getSettings(context: Rule.RuleContext): FoundationSettings {
+  const user = ((context.settings as Record<string, unknown> | undefined)?.foundation ?? {}) as Partial<FoundationSettings>;
   const merged = { ...DEFAULT_SETTINGS, ...user };
   return {
     srcDir: cleanDir(merged.srcDir),

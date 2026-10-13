@@ -1,8 +1,8 @@
 # next-foundation
 
-Shared architecture for Next.js projects: one package (`@kedar/foundation`,
+Shared architecture for Next.js projects: one package (`@devwithkd/foundation`,
 TypeScript source with subpath exports) and one ESLint plugin
-(`@kedar/eslint-plugin`, built JS).
+(`@devwithkd/eslint-plugin`, built JS).
 
 The design decisions and the build plans live in the `worcoor-web-v2.0` repo
 under `docs/plans/` (start with `00-overview.md`).
@@ -30,35 +30,43 @@ and, only for the subpaths you import, `@tanstack/react-query`, `better-auth`,
 The package ships TypeScript source, so add it to `next.config.ts`:
 
 ```ts
-const nextConfig = { transpilePackages: ["@kedar/foundation"] };
+const nextConfig = { transpilePackages: ["@devwithkd/foundation"] };
 ```
 
-### Development (what worcoor-web-v2.0 uses)
+### Install
+
+```sh
+pnpm add @devwithkd/foundation
+pnpm add -D @devwithkd/eslint-plugin
+```
+
+### Developing the package against an app
 
 Install from the sibling checkout. pnpm's `injected` makes a real copy (so peer
-dependencies resolve from the consumer) instead of a symlink:
+dependencies resolve from the app) instead of a symlink:
 
 ```jsonc
-// consumer package.json
-"dependencies": {
-  "@kedar/foundation": "file:../next-foundation/packages/foundation",
-  "@kedar/eslint-plugin": "file:../next-foundation/packages/eslint-plugin"
-},
-"dependenciesMeta": {
-  "@kedar/foundation": { "injected": true },
-  "@kedar/eslint-plugin": { "injected": true }
-}
+// the app's package.json (temporarily, while changing the package)
+"dependencies": { "@devwithkd/foundation": "file:../next-foundation/packages/foundation" },
+"dependenciesMeta": { "@devwithkd/foundation": { "injected": true } }
 ```
 
-After changing the package, run `pnpm install` in the consumer to re-sync the
-injected copy. **Build the ESLint plugin first** (`pnpm build` here): its
-`dist/` is not committed.
+After changing the package run `pnpm install` in the app. Build the ESLint
+plugin first (`pnpm build` here): its `dist/` is not committed. Switch back to
+the registry version before committing the app.
 
-### Published (later)
+### Releasing
 
-GitHub Packages, with `@kedar:registry=https://npm.pkg.github.com` in the
-consumer's `.npmrc`. The npm scope must equal the GitHub owner, so rename
-`@kedar` to the real owner before the first publish (`@kedar` is a placeholder).
+Both packages are public on npm under the `@devwithkd` scope.
+
+```sh
+npm login                                   # once per machine
+pnpm -r publish --access public --dry-run   # check what would go out
+pnpm -r publish --access public             # `prepublishOnly` typechecks, tests and builds
+```
+
+Bump the version in each `package.json` first (published versions cannot be
+changed) and add a line to `CHANGELOG.md`.
 
 ## Working on the package
 

@@ -4,7 +4,7 @@ The `Logger` interface the rest of the package depends on. Types only: the
 project provides the implementation (pino, Sentry, Discord…).
 
 ```ts
-import type { Logger } from "@kedar/foundation/logger";
+import type { Logger } from "@devwithkd/foundation/logger";
 ```
 
 | Method | Meaning | Goes to |

@@ -2,7 +2,7 @@ import rule from "../src/rules/no-foreign-actions.js";
 import { FIXTURES, file, settings, tester } from "./helpers.js";
 
 // "@/orders/" is a more specific alias than "@/": the longest prefix must win.
-const nested = { kedar: { ...settings.kedar, alias: { "@/": `${FIXTURES}/`, "@/orders/": `${FIXTURES}/app/orders/` } } };
+const nested = { foundation: { ...settings.foundation, alias: { "@/": `${FIXTURES}/`, "@/orders/": `${FIXTURES}/app/orders/` } } };
 
 tester().run("no-foreign-actions", rule, {
   valid: [

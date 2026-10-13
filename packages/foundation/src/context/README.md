@@ -4,7 +4,7 @@ Turns request headers into a `RequestContext`: request id, IP, user agent and
 the signed-in actor. The package never imports your auth instance.
 
 ```ts
-import { defineAuthContext } from "@kedar/foundation/context";
+import { defineAuthContext } from "@devwithkd/foundation/context";
 
 export const authContext = defineAuthContext({
   getSession: (h) => auth.api.getSession({ headers: h }),
