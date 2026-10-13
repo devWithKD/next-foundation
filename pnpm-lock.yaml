@@ -10,6 +10,9 @@ importers:
 
   packages/eslint-plugin:
     devDependencies:
+      '@types/estree':
+        specifier: ^1.0.9
+        version: 1.0.9
       '@types/node':
         specifier: ^22
         version: 22.20.5

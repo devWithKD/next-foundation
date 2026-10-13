@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc -p .",
+    "build": "tsc -p tsconfig.build.json --noEmit false",
     "typecheck": "tsc --noEmit -p .",
     "test": "vitest run"
   },
@@ -17,6 +17,7 @@
     "typescript-eslint": ">=8"
   },
   "devDependencies": {
+    "@types/estree": "^1.0.9",
     "@types/node": "^22",
     "eslint": "^9",
     "typescript": "^5",
