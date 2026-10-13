@@ -4,12 +4,12 @@ import {
   asc,
   eq,
   getColumns,
-  ilike,
   or,
   sql,
   type SQL,
 } from "drizzle-orm";
 import type { PgColumn, PgTable } from "drizzle-orm/pg-core";
+import { containsLike } from "./helpers";
 import type { ReadExecutor } from "./types";
 
 type ColumnKey<T extends PgTable> = keyof T["_"]["columns"] & string;
@@ -50,7 +50,7 @@ export function makeOptionQuery<T extends PgTable, C extends ColumnKey<T>>(
 
   async function run(orgId: string | undefined, f: OptionsFilter) {
     const search = f.q
-      ? or(...config.searchable.map((k) => ilike(col(k), `%${f.q}%`)))
+      ? or(...config.searchable.map((k) => containsLike(col(k), f.q!)))
       : undefined;
 
     const base = and(config.active, search);

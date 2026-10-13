@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- `db`: `containsLike` / `escapeLike`: case-insensitive "contains" that treats `%`, `_` and `\` in user text as ordinary characters. `makeOptionQuery` now uses it (searching for `100%` used to act as a wildcard).
+
 ## 0.1.0
 
 First version. Not published; consumed from a sibling checkout.

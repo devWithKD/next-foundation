@@ -2,6 +2,7 @@ import "server-only";
 import {
   asc,
   desc,
+  ilike,
   inArray,
   sql,
   type SQL,
@@ -10,6 +11,19 @@ import {
 import type { PgColumn } from "drizzle-orm/pg-core";
 import type { SortSpec } from "../list";
 import type { WriteExecutor } from "./types";
+
+/** Makes `%`, `_` and `\` in user text match themselves inside a LIKE pattern. */
+export function escapeLike(text: string): string {
+  return text.replace(/[\\%_]/g, "\\$&");
+}
+
+/**
+ * Case-insensitive "contains", safe for user input: searching for `100%` or
+ * `a_b` finds those characters instead of acting as wildcards.
+ */
+export function containsLike(column: PgColumn, text: string): SQL {
+  return ilike(column, `%${escapeLike(text)}%`);
+}
 
 /**
  * Serialises work on something that has no row to lock (e.g. "next number for

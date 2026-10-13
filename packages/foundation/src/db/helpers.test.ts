@@ -2,9 +2,26 @@ import { PgDialect } from "drizzle-orm/pg-core";
 import { sql, type SQL } from "drizzle-orm";
 import { describe, expect, it } from "vitest";
 import { items, recordingDb } from "../../test/db";
-import { buildOrderBy, inIds, isUniqueViolation, paginate, withAdvisoryLock } from "./helpers";
+import { buildOrderBy, inIds, isUniqueViolation, paginate, withAdvisoryLock, containsLike, escapeLike } from "./helpers";
 
 const render = (q: SQL) => new PgDialect().sqlToQuery(q);
+
+describe("escapeLike / containsLike", () => {
+  it("escapes the three LIKE metacharacters", () => {
+    expect(escapeLike("plain")).toBe("plain");
+    expect(escapeLike("100%")).toBe("100\\%");
+    expect(escapeLike("a_b")).toBe("a\\_b");
+    expect(escapeLike("a\\b")).toBe("a\\\\b");
+    expect(escapeLike("%_\\")).toBe("\\%\\_\\\\");
+  });
+
+  it("builds a case-insensitive contains over the escaped text", async () => {
+    const { db, last } = recordingDb();
+    await db.select().from(items).where(containsLike(items.name, "50%_off"));
+    expect(last().sql).toContain('"items"."name" ilike $1');
+    expect(last().params).toEqual(["%50\\%\\_off%"]);
+  });
+});
 
 describe("inIds", () => {
   it('"all" means no restriction', () => {

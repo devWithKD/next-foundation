@@ -30,6 +30,12 @@ describe("makeOptionQuery (global)", () => {
     expect(last().params[0]).toBe("%wid%");
   });
 
+  it("treats % _ and \\ in the search text as ordinary characters", async () => {
+    const { db, last } = recordingDb();
+    await global(db)({ q: "100%_a\\b" });
+    expect(last().params[0]).toBe("%100\\%\\_a\\\\b%");
+  });
+
   it("keeps the selected option visible even if it no longer matches", async () => {
     const { db, last } = recordingDb();
     await global(db)({ q: "zzz", selectedId: "keep-me" });

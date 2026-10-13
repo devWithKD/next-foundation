@@ -8,5 +8,5 @@ export {
   type ReadOptions,
   type WriteOptions,
 } from "./repository";
-export { buildOrderBy, inIds, isUniqueViolation, paginate, withAdvisoryLock } from "./helpers";
+export { buildOrderBy, containsLike, escapeLike, inIds, isUniqueViolation, paginate, withAdvisoryLock } from "./helpers";
 export { makeOptionQuery, type OptionsDto, type OptionsFilter } from "./option-query";
