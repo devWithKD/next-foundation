@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- `adapters`: `createAction` now returns `(raw: z.input<schema>) => …` instead of `(raw: unknown) => …`, so clients (`useActionMutation`) type-check the values they submit. At runtime it still accepts anything and validates it.
 - `db`: `containsLike` / `escapeLike`: case-insensitive "contains" that treats `%`, `_` and `\` in user text as ordinary characters. `makeOptionQuery` now uses it (searching for `100%` used to act as a wildcard).
 
 ## 0.1.0

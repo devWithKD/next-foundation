@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, expectTypeOf, it, vi } from "vitest";
 import { z } from "zod";
 import {
   ConflictError,
@@ -179,8 +179,9 @@ describe("createAction: rate limiting", () => {
       rateLimit: { key: "x:write", perMinute: 5 },
       handler: async () => 1,
     });
-    // Invalid input: the limiter must still have been consulted first.
-    await action({ n: "nope" });
+    // Invalid input: the limiter must still have been consulted first. (Typed callers can't
+    // send this; a raw HTTP call to the action can, so the runtime still has to cope.)
+    await action({ n: "nope" } as never);
     expect(enforce).toHaveBeenCalledWith({
       key: "x:write",
       perMinute: 5,
@@ -397,5 +398,24 @@ describe("requirePage", () => {
     await expect(requirePage()).rejects.toMatchObject({
       digest: expect.stringMatching(/^NEXT_REDIRECT;.*\/login;/),
     });
+  });
+});
+
+describe("createAction typing", () => {
+  it("exposes the schema's INPUT type to callers, and its OUTPUT type to the handler", () => {
+    const schema = z.object({ title: z.string().trim(), tags: z.array(z.string()).default([]) });
+    const { createAction } = setup();
+    const action = createAction({
+      name: "x.typed",
+      input: schema,
+      handler: async (input) => {
+        expectTypeOf(input).toEqualTypeOf<{ title: string; tags: string[] }>(); // defaults applied
+        return 1;
+      },
+    });
+    // A caller may omit `tags` (it has a default); the type reflects that.
+    expectTypeOf(action).parameter(0).toEqualTypeOf<{ title: string; tags?: string[] | undefined }>();
+    // @ts-expect-error title is required
+    void action({ tags: [] });
   });
 });

@@ -119,12 +119,18 @@ export function createAdapters<A extends BaseActor>(opts: {
     if (rateLimit && rateLimiter) await rateLimiter.enforce({ ...rateLimit, subject, requestId });
   }
 
-  function createAction<I, O>(def: {
+  /**
+   * `I` is what the handler receives (the schema's OUTPUT), `R` what a caller
+   * passes (its INPUT, before transforms and defaults). Exposing `R` lets a
+   * client type-check the values it submits: `useActionMutation(action)` then
+   * knows the form's shape instead of `unknown`.
+   */
+  function createAction<I, O, R = unknown>(def: {
     name: string;
-    input: z.ZodType<I>;
+    input: z.ZodType<I, R>;
     rateLimit?: RateLimit;
     handler: (input: I, ctx: RequestContext<A>) => Promise<O>;
-  }): (raw: unknown) => Promise<ActionResult<O>> {
+  }): (raw: R) => Promise<ActionResult<O>> {
     return async (raw) => {
       // Declared outside the try so the catch can still report them.
       let ctx: RequestContext<A> | null = null;
