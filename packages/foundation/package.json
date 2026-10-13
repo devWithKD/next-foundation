@@ -5,7 +5,8 @@
   "sideEffects": false,
   "files": [
     "src",
-    "!src/**/*.test.ts"
+    "!src/**/*.test.ts",
+    "!src/**/*.test.tsx"
   ],
   "exports": {
     "./errors": "./src/errors/index.ts",
