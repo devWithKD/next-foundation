@@ -64,4 +64,22 @@ export const auditLog = pgTable(
 ```
 
 The repository is a thin insert of `AuditRecord`s (`record(entry | null, tx)`
-and `recordMany`), plus a batched retention sweep by severity.
+and `recordMany`), plus a batched retention sweep.
+
+## The audit log is the source of "who" and "when"
+
+Business tables carry `created_at` and (if soft-deletable) `deleted_at`, and
+nothing else about history: no `created_by`, `updated_by`, `updated_at`.
+That makes the log load-bearing:
+
+- Every command that inserts, changes, soft-deletes or restores a row writes
+  `<resource>.created` / `.updated` / `.deleted` / `.restored` (plus domain
+  verbs) **in the same transaction**, with `resourceId` = the row id. Test it.
+- "Created by" = the first `<resource>.created` row; "last activity" = the
+  latest row. Put both as SQL expressions (correlated subqueries on
+  `audit_resource_idx`) in the project's `audit.sql.ts`, so read models can
+  use them.
+- **Retention never deletes entity events.** Sweep only auth and
+  authorization noise (resource types `auth`, `authz`) older than a set age.
+- A column the product filters or branches on is domain data, not audit:
+  keep it, named for its meaning (`received_by_id`, `assigned_to_id`).
