@@ -15,6 +15,7 @@ await roles.update({ id }, { name }, { tx, scope });     // scope applies to upd
 await roles.softDelete({ id }, { tx });                  // sets deletedAt
 ```
 
+- **Keys can be composite.** The third constructor argument lists the key columns: `["id"]` for a surrogate key, `["poId", "userId"]` for a join table. Every method takes `Pick<Row, KeyCols>` as its key.
 - `Repository` is for the **write path** (load to mutate, then save). Reads made to *show* something belong in `*.queries.ts`.
 - Every method takes one options object: `{ tx?, lock?, scope?, withDeleted? }`. A `scope` is ANDed into reads **and** updates, so a policy bug updates nothing instead of someone else's row.
 - Soft delete is `deletedAt IS NOT NULL`: there is no `isDeleted` flag. `SoftDeletableRepository` excludes deleted rows unless `withDeleted`, and its type refuses a table without a nullable `deletedAt`.
