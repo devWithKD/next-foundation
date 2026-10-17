@@ -2,12 +2,11 @@
 
 ## Unreleased
 
-- `adapters`: `createAction` now returns `(raw: z.input<schema>) => …` instead of `(raw: unknown) => …`, so clients (`useActionMutation`) type-check the values they submit. At runtime it still accepts anything and validates it.
-- `db`: `containsLike` / `escapeLike`: case-insensitive "contains" that treats `%`, `_` and `\` in user text as ordinary characters. `makeOptionQuery` now uses it (searching for `100%` used to act as a wildcard).
+- Docs: README now has a step-by-step guide for starting a new project.
 
 ## 0.1.0
 
-First version. Not published; consumed from a sibling checkout.
+First version. Published to npm (public) as `@devwithkd/foundation` and `@devwithkd/eslint-plugin`.
 
 ### `@devwithkd/foundation`
 - `errors`, `result`, `env`, `logger`: shared failure types, wire types, validated env, logger interface.

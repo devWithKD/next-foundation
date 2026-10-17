@@ -1,7 +1,7 @@
 # @devwithkd/eslint-plugin
 
-Lint rules that keep the layered pattern from eroding. Built JS (`dist/`), so
-build it before linting: `pnpm --filter @devwithkd/eslint-plugin build`.
+Lint rules that keep the layered pattern from eroding. Published as built JS.
+Working on the plugin itself: `pnpm --filter @devwithkd/eslint-plugin build`.
 
 ```js
 // eslint.config.mjs

@@ -19,6 +19,30 @@ Node `>=22.12`. Peer dependencies: `next >=16.3`, `react >=19.2`, `zod >=4.1`,
 `drizzle-orm >=1.0.0-rc.4`; and, only for the subpaths you import,
 `@tanstack/react-query`, `better-auth`, `ioredis` or `@upstash/redis`, `server-only`.
 
+## Quick start
+
+```sh
+pnpm create next-app@latest my-app --ts --tailwind --eslint --app --src-dir --import-alias "@/*"
+cd my-app
+pnpm add @devwithkd/foundation zod server-only drizzle-orm@1.0.0-rc.4 pg better-auth @tanstack/react-query
+pnpm add -D @devwithkd/eslint-plugin drizzle-kit @types/pg
+```
+
+Then add `transpilePackages: ["@devwithkd/foundation"]` to `next.config.ts`,
+register the ESLint preset, and wire `src/server/adapters.ts`:
+
+```ts
+import { createAdapters } from "@devwithkd/foundation/adapters";
+
+export const { createAction, createRoute, createPublicRoute, requirePage } =
+  createAdapters<Actor>({ context: authContext, logger, loginPath: "/login" });
+```
+
+Every server action, route handler and page then goes through those four
+functions over the same services. The full step-by-step guide (folder layout,
+module file kinds, auth, audit, first feature, lint rules) is in the
+[repository README](https://github.com/devWithKD/next-foundation#starting-a-new-project).
+
 ## Subpaths
 
 `errors`, `result`, `env`, `logger`, `authz`, `better-auth`, `context`,
