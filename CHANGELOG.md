@@ -8,6 +8,9 @@
 
 First version. Published to npm (public) as `@devwithkd/foundation` and `@devwithkd/eslint-plugin`.
 
+- `adapters`: `createAction` returns `(raw: z.input<schema>) => …` (not `unknown`), so `useActionMutation` callers type-check what they submit. At runtime it still accepts anything and validates it.
+- `db`: `containsLike` / `escapeLike`: case-insensitive "contains" that treats `%`, `_` and `\` in user text as ordinary characters; `makeOptionQuery` uses it.
+
 ### `@devwithkd/foundation`
 - `errors`, `result`, `env`, `logger`: shared failure types, wire types, validated env, logger interface.
 - `authz`, `better-auth`, `context`: permission helpers, role-string expansion, request context.
